@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Key Generator Form</title>
+    <style>
+        /* Gaya dasar untuk responsivitas dan estetika */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .api-key-form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box; /* Penting untuk responsivitas */
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-generate {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-generate:hover {
+            background-color: #218838;
+        }
+
+        .btn-generate:active {
+            background-color: #1e7e34;
+        }
+
+        /* Responsivitas: Penyesuaian untuk layar kecil */
+        @media (max-width: 600px) {
+            .api-key-form-container {
+                padding: 20px;
+                margin: 10px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            input[type="text"],
+            textarea,
+            .btn-generate {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="api-key-form-container">
+    <h2>Generate New API Key</h2>
+    <form action="/generate-api-key" method="POST">
+        <div class="form-group">
+            <label for="key-name">Key Name <span style="color: red;">*</span></label>
+            <input type="text" id="key-name" name="key_name" placeholder="Contoh: MyWebApp-Prod" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description (Optional)</label>
+            <textarea id="description" name="description" placeholder="Jelaskan tujuan penggunaan API key ini"></textarea>
+        </div>
+
+        <button type="submit" class="btn-generate">
+            Generate API Key
+        </button>
+    </form>
+</div>
+
+</body>
+</html>
