@@ -1,131 +1,139 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Key Generator Form</title>
-    <style>
-        /* Gaya dasar untuk responsivitas dan estetika */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generate API Key</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
 
-        .api-key-form-container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-        }
+    body {
+      background: linear-gradient(135deg, #2563eb, #1e3a8a);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #333;
+    }
 
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-            font-size: 1.8em;
-        }
+    .card {
+      background: #fff;
+      padding: 35px 40px;
+      border-radius: 20px;
+      width: 420px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    .card:hover {
+      transform: translateY(-5px);
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 600;
-        }
+    h2 {
+      color: #1e40af;
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+    }
 
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box; /* Penting untuk responsivitas */
-            font-size: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
+      color: #555;
+      font-weight: 500;
+    }
 
-        input[type="text"]:focus,
-        textarea:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-            outline: none;
-        }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      transition: border-color 0.2s ease;
+      font-size: 0.95rem;
+    }
 
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
+    input:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+    }
 
-        .btn-generate {
-            width: 100%;
-            background-color: #28a745;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 17px;
-            font-weight: 700;
-            transition: background-color 0.3s ease;
-        }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.1s ease;
+    }
 
-        .btn-generate:hover {
-            background-color: #218838;
-        }
+    button:hover {
+      background: #1e40af;
+      transform: scale(1.02);
+    }
 
-        .btn-generate:active {
-            background-color: #1e7e34;
-        }
+    #result {
+      margin-top: 20px;
+      text-align: left;
+    }
 
-        /* Responsivitas: Penyesuaian untuk layar kecil */
-        @media (max-width: 600px) {
-            .api-key-form-container {
-                padding: 20px;
-                margin: 10px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            }
-            h2 {
-                font-size: 1.5em;
-            }
-            input[type="text"],
-            textarea,
-            .btn-generate {
-                font-size: 15px;
-            }
-        }
-    </style>
+    pre {
+      background: #f1f5f9;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: #1e293b;
+      border-left: 5px solid #2563eb;
+      overflow-x: auto;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-
-<div class="api-key-form-container">
-    <h2>Generate New API Key</h2>
-    <form action="/generate-api-key" method="POST">
-        <div class="form-group">
-            <label for="key-name">Key Name <span style="color: red;">*</span></label>
-            <input type="text" id="key-name" name="key_name" placeholder="Contoh: MyWebApp-Prod" required>
-        </div>
-
-        <div class="form-group">
-            <label for="description">Description (Optional)</label>
-            <textarea id="description" name="description" placeholder="Jelaskan tujuan penggunaan API key ini"></textarea>
-        </div>
-
-        <button type="submit" class="btn-generate">
-            Generate API Key
-        </button>
+  <div class="card">
+    <h2>🔑 Generate API Key</h2>
+    <form id="apiForm">
+      <label for="name">Nama API Key (Opsional)</label>
+      <input type="text" id="name" placeholder="Masukkan nama API key..." />
+      <button type="submit">Generate</button>
     </form>
-</div>
+    <div id="result"></div>
+  </div>
 
+  <script>
+    document.getElementById('apiForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const res = await fetch('/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name })
+      });
+      const data = await res.json();
+
+      document.getElementById('result').innerHTML = `
+        <div class="fade-in">
+          <pre><b>Nama:</b> ${data.name || '(Tanpa Nama)'}\n<b>API Key:</b> ${data.apiKey}</pre>
+        </div>`;
+    });
+  </script>
 </body>
 </html>
